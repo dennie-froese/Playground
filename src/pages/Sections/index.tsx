@@ -2,14 +2,22 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import {StyleSheet, View, Text, Pressable} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
+import {useNavigation} from '@react-navigation/core';
 
 export default function Sections() {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollContainer}>
-        <Pressable style={styles.sectionContainer}>
-          <Text style={styles.header}>Header</Text>
-          <Text style={styles.main}>explanation</Text>
+        <Pressable
+          style={styles.sectionContainer}
+          onPress={() =>
+            navigation.navigate('CapitalizeFirstLetterOfEachWord')
+          }>
+          <Text style={styles.header}>CapitalizeFirstLetterOfEachWord</Text>
+          <Text style={styles.main}>
+            How to capitelize the first letter of each word in JavaScript
+          </Text>
         </Pressable>
       </ScrollView>
     </View>
