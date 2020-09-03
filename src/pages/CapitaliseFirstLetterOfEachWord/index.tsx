@@ -8,11 +8,25 @@ export default function CapitaliseFirstLetterOfEachWord() {
   const [stringCaps, setStringCaps] = useState('');
   const [bool, setBool] = useState(false);
 
+  const [stringArray, setStringArray] = useState('');
+  const [stringArrayCaps, setStringArrayCaps] = useState<String | String[]>('');
+  const [boolArray, setBoolArray] = useState(false);
+
   const capitalise = () => {
     if (string.length > 0) {
       setStringCaps(string[0].toUpperCase() + string.substring(1));
-      console.warn(stringCaps);
       setBool(true);
+    }
+  };
+
+  const capitaliseArray = () => {
+    if (stringArray.length > 0) {
+      const words = stringArray.split(' ');
+      for (let i = 0; i < words.length; i++) {
+        words[i] = words[i][0].toUpperCase() + words[i].substring(1);
+        setStringArrayCaps(words.join(' '));
+        setBoolArray(true);
+      }
     }
   };
   return (
@@ -20,7 +34,7 @@ export default function CapitaliseFirstLetterOfEachWord() {
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.sectionContainer}>
           <Text style={styles.main}>
-            In this example, we want to transform words in JavaScript.
+            In this example, we want to transform words using JavaScript.
           </Text>
           <Text style={styles.main}>
             To do so, please input a word in the following text field and
@@ -41,6 +55,34 @@ export default function CapitaliseFirstLetterOfEachWord() {
             <TextInput
               style={{...styles.textInput}}
               defaultValue={stringCaps}
+              editable={false}
+            />
+          )}
+        </View>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.main}>
+            In the second example, we want to transform multiple words using
+            JavaScript.
+          </Text>
+          <Text style={styles.main}>
+            To do so, please input multiple words in the following text field
+            and transform them by clicking the "Transform" button below.
+          </Text>
+          <TextInput
+            placeholder="Please input word here"
+            style={styles.textInput}
+            onChangeText={(text) => setStringArray(text)}
+            value={stringArray}
+            editable={!boolArray}
+            autoCapitalize="none"
+          />
+          <Pressable style={styles.pressable} onPress={capitaliseArray}>
+            <Text>Transform!</Text>
+          </Pressable>
+          {boolArray && (
+            <TextInput
+              style={{...styles.textInput}}
+              defaultValue={stringArrayCaps.toString()}
               editable={false}
             />
           )}
