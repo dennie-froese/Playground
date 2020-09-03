@@ -3,9 +3,18 @@ import React, {useState} from 'react';
 import {StyleSheet, View, Text, TextInput, Pressable} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 
-export default function CapitalizeFirstLetterOfEachWord() {
+export default function CapitaliseFirstLetterOfEachWord() {
   const [string, setString] = useState('');
-  const stringCaps = '';
+  const [stringCaps, setStringCaps] = useState('');
+  const [bool, setBool] = useState(false);
+
+  const capitalise = () => {
+    if (string.length > 0) {
+      setStringCaps(string[0].toUpperCase() + string.substring(1));
+      console.warn(stringCaps);
+      setBool(true);
+    }
+  };
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollContainer}>
@@ -22,16 +31,19 @@ export default function CapitalizeFirstLetterOfEachWord() {
             style={styles.textInput}
             onChangeText={(text) => setString(text)}
             value={string}
+            editable={!bool}
             autoCapitalize="none"
           />
-          <Pressable style={styles.pressable}>
+          <Pressable style={styles.pressable} onPress={capitalise}>
             <Text>Transform!</Text>
           </Pressable>
-          <TextInput
-            style={{...styles.textInput}}
-            defaultValue={stringCaps ? stringCaps : ''}
-            editable={false}
-          />
+          {bool && (
+            <TextInput
+              style={{...styles.textInput}}
+              defaultValue={stringCaps}
+              editable={false}
+            />
+          )}
         </View>
       </ScrollView>
     </View>

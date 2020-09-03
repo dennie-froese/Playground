@@ -12,7 +12,7 @@ export default function Sections() {
         <Pressable
           style={styles.sectionContainer}
           onPress={() =>
-            navigation.navigate('CapitalizeFirstLetterOfEachWord')
+            navigation.navigate('CapitaliseFirstLetterOfEachWord')
           }>
           <Text style={styles.header}>CapitalizeFirstLetterOfEachWord</Text>
           <Text style={styles.main}>
