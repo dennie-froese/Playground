@@ -19,6 +19,14 @@ export default function Sections() {
             How to capitelize the first letter of each word in JavaScript
           </Text>
         </Pressable>
+        <Pressable
+          style={styles.sectionContainer}
+          onPress={() => navigation.navigate('ArrayInsertion')}>
+          <Text style={styles.header}>ArrayInsertion</Text>
+          <Text style={styles.main}>
+            How to insert elements into an array in JavaScript
+          </Text>
+        </Pressable>
       </ScrollView>
     </View>
   );
