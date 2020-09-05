@@ -43,6 +43,7 @@ export default function ArrayInsertion() {
               style={styles.checkbox}
               value={push}
               onValueChange={(newValue: boolean) => setPush(newValue)}
+              disabled={unshift || concat}
             />
             <Text>push()</Text>
           </View>
@@ -51,6 +52,7 @@ export default function ArrayInsertion() {
               style={styles.checkbox}
               value={unshift}
               onValueChange={(newValue: boolean) => setUnshift(newValue)}
+              disabled={push || concat}
             />
             <Text>unshift()</Text>
           </View>
@@ -59,6 +61,7 @@ export default function ArrayInsertion() {
               style={styles.checkbox}
               value={concat}
               onValueChange={(newValue: boolean) => setConcat(newValue)}
+              disabled={push || unshift}
             />
             <Text>concat()</Text>
           </View>
@@ -82,11 +85,6 @@ export default function ArrayInsertion() {
             <Text>Insert!</Text>
           </Pressable>
           {bool && (
-            // <TextInput
-            //   style={{...styles.textInput}}
-            //   value={array.toString()}
-            //   editable={false}
-            // />
             <Text style={styles.main}>
               New array with insertion: {array.toString()}
             </Text>
