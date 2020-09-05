@@ -5,7 +5,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import CheckBox from '@react-native-community/checkbox';
 
 export default function ArrayInsertion() {
-  const beginning = ['Orange', 'Apple', 'Banana'];
+  let beginning = ['Orange', 'Apple', 'Banana'];
   const [push, setPush] = useState(false);
   const [unshift, setUnshift] = useState(false);
   const [concat, setConcat] = useState(false);
@@ -18,7 +18,9 @@ export default function ArrayInsertion() {
       if (push) {
         beginning.push(string);
       } else if (unshift) {
+        beginning.unshift(string);
       } else if (concat) {
+        beginning = beginning.concat(string);
       }
       setArray(beginning);
       setBool(true);
