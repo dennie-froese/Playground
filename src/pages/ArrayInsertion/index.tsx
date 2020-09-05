@@ -12,6 +12,7 @@ export default function ArrayInsertion() {
   const [string, setString] = useState('');
   const [array, setArray] = useState(['']);
   const [bool, setBool] = useState(false);
+  const [error, setError] = useState('');
 
   const insert = () => {
     if (string.length > 0) {
@@ -24,6 +25,8 @@ export default function ArrayInsertion() {
       }
       setArray(beginning);
       setBool(true);
+    } else {
+      setError('Please enter a word in the field above.');
     }
   };
 
@@ -86,8 +89,9 @@ export default function ArrayInsertion() {
           <Pressable style={styles.pressable} onPress={insert}>
             <Text>Insert!</Text>
           </Pressable>
+          {error.length > 0 ? <Text style={styles.error}>{error}</Text> : null}
           {bool && (
-            <Text style={styles.main}>
+            <Text style={styles.error}>
               New array with insertion: {array.toString()}
             </Text>
           )}
@@ -123,6 +127,12 @@ const styles = StyleSheet.create({
     fontSize: 15,
     padding: 20,
     textAlign: 'center',
+  },
+  error: {
+    fontSize: 15,
+    padding: 10,
+    textAlign: 'center',
+    color: 'red',
   },
   textInput: {
     alignSelf: 'center',
