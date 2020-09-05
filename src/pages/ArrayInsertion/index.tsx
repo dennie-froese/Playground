@@ -38,24 +38,27 @@ export default function ArrayInsertion() {
             selection below which method you would like to use to add an
             element:
           </Text>
-          <View>
+          <View style={styles.checkboxContainer}>
             <CheckBox
+              style={styles.checkbox}
               value={push}
-              onValueChange={(newValue) => setPush(newValue)}
+              onValueChange={(newValue: boolean) => setPush(newValue)}
             />
             <Text>push()</Text>
           </View>
-          <View>
+          <View style={styles.checkboxContainer}>
             <CheckBox
+              style={styles.checkbox}
               value={unshift}
-              onValueChange={(newValue) => setUnshift(newValue)}
+              onValueChange={(newValue: boolean) => setUnshift(newValue)}
             />
             <Text>unshift()</Text>
           </View>
-          <View>
+          <View style={styles.checkboxContainer}>
             <CheckBox
+              style={styles.checkbox}
               value={concat}
-              onValueChange={(newValue) => setConcat(newValue)}
+              onValueChange={(newValue: boolean) => setConcat(newValue)}
             />
             <Text>concat()</Text>
           </View>
@@ -135,5 +138,14 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     backgroundColor: 'teal',
     alignSelf: 'center',
+  },
+  checkboxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    marginLeft: 50,
+  },
+  checkbox: {
+    margin: 10,
   },
 });
