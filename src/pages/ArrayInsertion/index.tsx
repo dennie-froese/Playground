@@ -15,7 +15,9 @@ export default function ArrayInsertion() {
   const [error, setError] = useState('');
 
   const insert = () => {
-    if (string.length > 0) {
+    if (!push && !unshift && !concat) {
+      setError('Please tick one of the insertion options above.');
+    } else if (string.length > 0) {
       if (push) {
         beginning.push(string);
       } else if (unshift) {
@@ -25,6 +27,7 @@ export default function ArrayInsertion() {
       }
       setArray(beginning);
       setBool(true);
+      setError('');
     } else {
       setError('Please enter a word in the field above.');
     }
@@ -91,8 +94,10 @@ export default function ArrayInsertion() {
           </Pressable>
           {error.length > 0 ? <Text style={styles.error}>{error}</Text> : null}
           {bool && (
-            <Text style={styles.error}>
-              New array with insertion: {array.toString()}
+            <Text style={styles.main}>
+              New array with insertion using{' '}
+              {push ? 'push()' : unshift ? 'unshift()' : 'concat()'}:{' '}
+              {array.toString()}
             </Text>
           )}
         </View>
