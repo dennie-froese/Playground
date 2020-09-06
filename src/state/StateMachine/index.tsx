@@ -7,8 +7,11 @@ const stateMachine = Machine({
     home: {
       on: {NAVIGATE: 'sections'},
     },
-    sections: {},
+    sections: {
+      on: {NAVIGATE_CAPS: 'capitalise', NAVIGATE_ARR: 'arr'},
+    },
     capitalise: {},
+    arr: {},
   },
 });
 

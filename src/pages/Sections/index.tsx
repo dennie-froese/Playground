@@ -13,7 +13,7 @@ export default function Sections() {
       <ScrollView style={styles.scrollContainer}>
         <Pressable
           style={styles.sectionContainer}
-          onPress={() => send('NAVIGATE')}>
+          onPress={() => send('NAVIGATE_CAPS')}>
           <Text style={styles.header}>CapitalizeFirstLetterOfEachWord</Text>
           <Text style={styles.main}>
             How to capitelize the first letter of each word in JavaScript
@@ -21,7 +21,7 @@ export default function Sections() {
         </Pressable>
         <Pressable
           style={styles.sectionContainer}
-          onPress={() => navigation.navigate('ArrayInsertion')}>
+          onPress={() => send('NAVIGATE_ARR')}>
           <Text style={styles.header}>ArrayInsertion</Text>
           <Text style={styles.main}>
             How to insert elements into an array in JavaScript

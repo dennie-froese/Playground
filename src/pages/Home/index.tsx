@@ -1,9 +1,10 @@
 import React from 'react';
 import {StyleSheet, View, Text, Pressable} from 'react-native';
-import {useNavigation} from '@react-navigation/core';
+import {useMachine} from '@xstate/react';
+import stateMachine from 'state/StateMachine';
 
 export default function Home() {
-  const navigation = useNavigation();
+  const [current, send] = useMachine(stateMachine);
 
   return (
     <>
@@ -13,9 +14,7 @@ export default function Home() {
           This is a place where I try out new things in the world of React /
           React Native / Javascript.
         </Text>
-        <Pressable
-          style={styles.pressable}
-          onPress={() => navigation.navigate('Sections')}>
+        <Pressable style={styles.pressable} onPress={() => send('NAVIGATE')}>
           <Text>Go to different sections</Text>
         </Pressable>
       </View>
