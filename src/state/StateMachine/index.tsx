@@ -2,9 +2,13 @@ import {Machine} from 'xstate';
 
 const stateMachine = Machine({
   id: 'state',
-  initial: 'HOME',
+  initial: 'home',
   states: {
-    route: {},
+    home: {
+      on: {NAVIGATE: 'sections'},
+    },
+    sections: {},
+    capitalise: {},
   },
 });
 
