@@ -1,12 +1,11 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, {useContext} from 'react';
 import {StyleSheet, View, Text, Pressable} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
-import {useMachine} from '@xstate/react';
-import stateMachine from 'state/StateMachine';
+import {StateMachineProvider} from 'state/StateMachine';
 
 export default function Sections() {
-  const [current, send] = useMachine(stateMachine);
+  const [current, send] = useContext(StateMachineProvider);
 
   return (
     <View style={styles.container}>

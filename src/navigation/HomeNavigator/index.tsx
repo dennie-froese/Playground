@@ -1,32 +1,64 @@
-import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+import React, {useContext} from 'react';
+import {createStackNavigator, HeaderBackButton} from '@react-navigation/stack';
 import Sections from 'pages/Sections';
 import ArrayInsertion from 'pages/ArrayInsertion';
 import CapitaliseFirstLetterOfEachWord from 'pages/CapitaliseFirstLetterOfEachWord';
 import Home from 'pages/Home';
-import {useMachine} from '@xstate/react';
-import stateMachine from 'state/StateMachine';
+import {StateMachineProvider} from 'state/StateMachine';
 
 const HomeStack = createStackNavigator();
 
 export default function HomeNavigator() {
-  const [current, send] = useMachine(stateMachine);
+  const [current, send] = useContext(StateMachineProvider);
   return (
     <HomeStack.Navigator>
       {current.matches('home') && (
         <HomeStack.Screen name="Home" component={Home} />
       )}
       {current.matches('sections') && (
-        <HomeStack.Screen name="Sections" component={Sections} />
+        <HomeStack.Screen
+          name="Sections"
+          component={Sections}
+          options={{
+            headerLeft: () => (
+              <HeaderBackButton
+                onPress={() => {
+                  send('NAVIGATE_HOME');
+                }}
+              />
+            ),
+          }}
+        />
       )}
       {current.matches('capitalise') && (
         <HomeStack.Screen
           name="CapitaliseFirstLetterOfEachWord"
           component={CapitaliseFirstLetterOfEachWord}
+          options={{
+            headerLeft: () => (
+              <HeaderBackButton
+                onPress={() => {
+                  send('NAVIGATE_BACK');
+                }}
+              />
+            ),
+          }}
         />
       )}
       {current.matches('capitalise') && (
-        <HomeStack.Screen name="ArrayInsertion" component={ArrayInsertion} />
+        <HomeStack.Screen
+          name="ArrayInsertion"
+          component={ArrayInsertion}
+          options={{
+            headerLeft: () => (
+              <HeaderBackButton
+                onPress={() => {
+                  send('NAVIGATE_BACK');
+                }}
+              />
+            ),
+          }}
+        />
       )}
     </HomeStack.Navigator>
   );
