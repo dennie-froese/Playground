@@ -13,9 +13,9 @@ export default function Sections() {
         <Pressable
           style={styles.sectionContainer}
           onPress={() => send('NAVIGATE_CAPS')}>
-          <Text style={styles.header}>CapitalizeFirstLetterOfEachWord</Text>
+          <Text style={styles.header}>CapitaliseFirstLetterOfEachWord</Text>
           <Text style={styles.main}>
-            How to capitelize the first letter of each word in JavaScript
+            How to capitlise the first letter of each word in JavaScript
           </Text>
         </Pressable>
         <Pressable

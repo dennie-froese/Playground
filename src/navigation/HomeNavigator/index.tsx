@@ -12,10 +12,10 @@ export default function HomeNavigator() {
   const [current, send] = useContext(StateMachineProvider);
   return (
     <HomeStack.Navigator>
-      {current.matches('home') && (
+      {current.matches('routes.home') && (
         <HomeStack.Screen name="Home" component={Home} />
       )}
-      {current.matches('sections') && (
+      {current.matches('routes.sections') && (
         <HomeStack.Screen
           name="Sections"
           component={Sections}
@@ -30,7 +30,7 @@ export default function HomeNavigator() {
           }}
         />
       )}
-      {current.matches('capitalise') && (
+      {current.matches('routes.capitalise') && (
         <HomeStack.Screen
           name="CapitaliseFirstLetterOfEachWord"
           component={CapitaliseFirstLetterOfEachWord}
@@ -38,14 +38,14 @@ export default function HomeNavigator() {
             headerLeft: () => (
               <HeaderBackButton
                 onPress={() => {
-                  send('NAVIGATE_BACK');
+                  send('NAVIGATE_SECTIONS');
                 }}
               />
             ),
           }}
         />
       )}
-      {current.matches('capitalise') && (
+      {current.matches('routes.arr') && (
         <HomeStack.Screen
           name="ArrayInsertion"
           component={ArrayInsertion}
@@ -53,7 +53,7 @@ export default function HomeNavigator() {
             headerLeft: () => (
               <HeaderBackButton
                 onPress={() => {
-                  send('NAVIGATE_BACK');
+                  send('NAVIGATE_SECTIONS');
                 }}
               />
             ),

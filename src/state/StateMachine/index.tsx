@@ -1,7 +1,7 @@
 import React from 'react';
-import {Machine} from 'xstate';
+import {Machine, MachineConfig} from 'xstate';
 
-const stateMachine = Machine({
+const routesMachine = {
   id: 'state',
   initial: 'home',
   states: {
@@ -16,11 +16,20 @@ const stateMachine = Machine({
       },
     },
     capitalise: {
-      on: {NAVIGATE_BACK: 'sections'},
+      on: {NAVIGATE_SECTIONS: 'sections'},
     },
     arr: {
-      on: {NAVIGATE_BACK: 'sections'},
+      on: {NAVIGATE_SECTIONS: 'sections'},
     },
+  },
+};
+
+const stateMachine = Machine({
+  id: 'state',
+  type: 'parallel',
+  states: {
+    routes: routesMachine,
+    array: {},
   },
 });
 
