@@ -1,11 +1,13 @@
 import 'react-native-gesture-handler';
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {StyleSheet, View, Text, TextInput, Pressable} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import CheckBox from '@react-native-community/checkbox';
+import {StateMachineProvider} from 'state/StateMachine';
 
 export default function ArrayInsertion() {
-  let beginning = ['Orange', 'Apple', 'Banana'];
+  const [current, send] = useContext(StateMachineProvider);
+  const initArray = current.context.array;
   const [push, setPush] = useState(false);
   const [unshift, setUnshift] = useState(false);
   const [concat, setConcat] = useState(false);
@@ -14,24 +16,26 @@ export default function ArrayInsertion() {
   const [bool, setBool] = useState(false);
   const [error, setError] = useState('');
 
-  const insert = () => {
-    if (!push && !unshift && !concat) {
-      setError('Please tick one of the insertion options above.');
-    } else if (string.length > 0) {
-      if (push) {
-        beginning.push(string);
-      } else if (unshift) {
-        beginning.unshift(string);
-      } else if (concat) {
-        beginning = beginning.concat(string);
-      }
-      setArray(beginning);
-      setBool(true);
-      setError('');
-    } else {
-      setError('Please enter a word in the field above.');
-    }
-  };
+  console.warn(initArray);
+
+  // const insert = () => {
+  //   if (!push && !unshift && !concat) {
+  //     setError('Please tick one of the insertion options above.');
+  //   } else if (string.length > 0) {
+  //     if (push) {
+  //       beginning.push(string);
+  //     } else if (unshift) {
+  //       beginning.unshift(string);
+  //     } else if (concat) {
+  //       beginning = beginning.concat(string);
+  //     }
+  //     setArray(beginning);
+  //     setBool(true);
+  //     setError('');
+  //   } else {
+  //     setError('Please enter a word in the field above.');
+  //   }
+  // };
 
   return (
     <View style={styles.container}>
@@ -78,9 +82,7 @@ export default function ArrayInsertion() {
             Next, please input a word in the following text field and insert it
             into the original array by clicking the "Insert".
           </Text>
-          <Text style={styles.main}>
-            Original array: {beginning.toString()}
-          </Text>
+          <Text style={styles.main}>Original array: {initArray}</Text>
           <TextInput
             placeholder="Please input word here"
             style={styles.textInput}
@@ -89,9 +91,9 @@ export default function ArrayInsertion() {
             editable={!bool}
             autoCapitalize="none"
           />
-          <Pressable style={styles.pressable} onPress={insert}>
+          {/* <Pressable style={styles.pressable} onPress={insert}>
             <Text>Insert!</Text>
-          </Pressable>
+          </Pressable> */}
           {error.length > 0 ? <Text style={styles.error}>{error}</Text> : null}
           {bool && (
             <Text style={styles.main}>

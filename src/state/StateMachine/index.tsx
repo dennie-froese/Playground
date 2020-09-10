@@ -1,8 +1,12 @@
 import React from 'react';
-import {Machine, MachineConfig} from 'xstate';
+import {Machine} from 'xstate';
+
+const backToSections = {
+  on: {NAVIGATE_SECTIONS: 'sections'},
+};
 
 const routesMachine = {
-  id: 'state',
+  id: 'routes',
   initial: 'home',
   states: {
     home: {
@@ -15,21 +19,23 @@ const routesMachine = {
         NAVIGATE_HOME: 'home',
       },
     },
-    capitalise: {
-      on: {NAVIGATE_SECTIONS: 'sections'},
-    },
-    arr: {
-      on: {NAVIGATE_SECTIONS: 'sections'},
-    },
+    capitalise: backToSections,
+    arr: backToSections,
   },
+};
+
+const arrayMachine = {
+  id: 'array',
+  states: {},
 };
 
 const stateMachine = Machine({
   id: 'state',
   type: 'parallel',
+  context: {array: ['Orange', 'Apple', 'Banana']},
   states: {
     routes: routesMachine,
-    array: {},
+    array: arrayMachine,
   },
 });
 
