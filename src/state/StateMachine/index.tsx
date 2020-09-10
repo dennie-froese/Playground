@@ -26,7 +26,28 @@ const routesMachine = {
 
 const arrayMachine = {
   id: 'array',
-  states: {},
+  initial: 'start',
+  states: {
+    start: {
+      on: {
+        ARRAY_INSERT: 'finish',
+        ERROR_UNTICKED: 'errorUnticked',
+        ERROR_NOINPUT: 'errorNoInput',
+      },
+    },
+    errorUnticked: {
+      on: {
+        ARRAY_INSERT: 'finish',
+        ERROR_NOINPUT: 'errorNoInput',
+      },
+    },
+    errorNoInput: {
+      on: {
+        ARRAY_INSERT: 'finish',
+      },
+    },
+    finish: {},
+  },
 };
 
 const stateMachine = Machine({

@@ -16,26 +16,28 @@ export default function ArrayInsertion() {
   const [bool, setBool] = useState(false);
   const [error, setError] = useState('');
 
-  console.warn(initArray);
-
-  // const insert = () => {
-  //   if (!push && !unshift && !concat) {
-  //     setError('Please tick one of the insertion options above.');
-  //   } else if (string.length > 0) {
-  //     if (push) {
-  //       beginning.push(string);
-  //     } else if (unshift) {
-  //       beginning.unshift(string);
-  //     } else if (concat) {
-  //       beginning = beginning.concat(string);
-  //     }
-  //     setArray(beginning);
-  //     setBool(true);
-  //     setError('');
-  //   } else {
-  //     setError('Please enter a word in the field above.');
-  //   }
-  // };
+  const insert = () => {
+    // if (!push && !unshift && !concat) {
+    //   setError('Please tick one of the insertion options above.');
+    // } else if (string.length > 0) {
+    //   if (push) {
+    //     initArray.push(string);
+    //   } else if (unshift) {
+    //     initArray.unshift(string);
+    //   } else if (concat) {
+    //     let arrayConcat = initArray;
+    //     arrayConcat = initArray.concat(string);
+    //   }
+    //   setArray(beginning);
+    //   setBool(true);
+    //   setError('');
+    // } else {
+    //   setError('Please enter a word in the field above.');
+    // }
+    console.warn(current.matches('array.start'));
+    send('ERROR_UNTICKED');
+    console.warn(current.matches('array.errorUnticked'));
+  };
 
   return (
     <View style={styles.container}>
@@ -91,10 +93,18 @@ export default function ArrayInsertion() {
             editable={!bool}
             autoCapitalize="none"
           />
-          {/* <Pressable style={styles.pressable} onPress={insert}>
+          <Pressable style={styles.pressable} onPress={insert}>
             <Text>Insert!</Text>
-          </Pressable> */}
-          {error.length > 0 ? <Text style={styles.error}>{error}</Text> : null}
+          </Pressable>
+          {current.matches('array.errorUnticked') ? (
+            <Text style={styles.error}>
+              Please tick one of the insertion options above.
+            </Text>
+          ) : current.matches('array.errorNoInput') ? (
+            <Text style={styles.error}>
+              Please enter a word in the field above.
+            </Text>
+          ) : null}
           {bool && (
             <Text style={styles.main}>
               New array with insertion using{' '}
