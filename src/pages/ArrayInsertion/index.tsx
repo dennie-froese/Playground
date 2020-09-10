@@ -8,18 +8,20 @@ import {StateMachineProvider} from 'state/StateMachine';
 export default function ArrayInsertion() {
   const [current, send] = useContext(StateMachineProvider);
   const initArray = current.context.array;
-  const [push, setPush] = useState(false);
-  const [unshift, setUnshift] = useState(false);
-  const [concat, setConcat] = useState(false);
+  const push = current.matches('array.pushTicked');
+  const unshift = current.matches('array.unshiftTicked');
+  const concat = current.matches('array.concatTicked');
   const [string, setString] = useState('');
   const [array, setArray] = useState(['']);
   const [bool, setBool] = useState(false);
   const [error, setError] = useState('');
 
   const insert = () => {
-    // if (!push && !unshift && !concat) {
-    //   setError('Please tick one of the insertion options above.');
-    // } else if (string.length > 0) {
+    console.warn(current.matches('array.start'));
+    if (!push && !unshift && !concat) {
+      send('ERROR_UNTICKED');
+    }
+    // else if (string.length > 0) {
     //   if (push) {
     //     initArray.push(string);
     //   } else if (unshift) {
@@ -34,9 +36,6 @@ export default function ArrayInsertion() {
     // } else {
     //   setError('Please enter a word in the field above.');
     // }
-    console.warn(current.matches('array.start'));
-    send('ERROR_UNTICKED');
-    console.warn(current.matches('array.errorUnticked'));
   };
 
   return (
@@ -55,8 +54,10 @@ export default function ArrayInsertion() {
           <View style={styles.checkboxContainer}>
             <CheckBox
               style={styles.checkbox}
-              value={push}
-              onValueChange={(newValue: boolean) => setPush(newValue)}
+              value={current.matches('array.pushTicked')}
+              onValueChange={(newValue: boolean) =>
+                newValue ? send('TICK_PUSH') : send('UNTICK_PUSH')
+              }
               disabled={unshift || concat}
             />
             <Text>push()</Text>
@@ -65,7 +66,9 @@ export default function ArrayInsertion() {
             <CheckBox
               style={styles.checkbox}
               value={unshift}
-              onValueChange={(newValue: boolean) => setUnshift(newValue)}
+              onValueChange={(newValue: boolean) =>
+                newValue ? send('TICK_UNSHIFT') : send('UNTICK_UNSHIFT')
+              }
               disabled={push || concat}
             />
             <Text>unshift()</Text>
@@ -74,7 +77,9 @@ export default function ArrayInsertion() {
             <CheckBox
               style={styles.checkbox}
               value={concat}
-              onValueChange={(newValue: boolean) => setConcat(newValue)}
+              onValueChange={(newValue: boolean) =>
+                newValue ? send('TICK_CONCAT') : send('UNTICK_CONCAT')
+              }
               disabled={push || unshift}
             />
             <Text>concat()</Text>

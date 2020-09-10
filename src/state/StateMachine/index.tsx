@@ -30,11 +30,16 @@ const arrayMachine = {
   states: {
     start: {
       on: {
-        ARRAY_INSERT: 'finish',
+        TICK_PUSH: 'pushTicked',
+        TICK_UNSHIFT: 'unshiftTicked',
+        TICK_CONCAT: 'concatTicked',
         ERROR_UNTICKED: 'errorUnticked',
         ERROR_NOINPUT: 'errorNoInput',
       },
     },
+    pushTicked: {},
+    unshiftTicked: {},
+    concatTicked: {},
     errorUnticked: {
       on: {
         ARRAY_INSERT: 'finish',
