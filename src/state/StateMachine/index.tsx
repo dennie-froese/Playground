@@ -37,9 +37,24 @@ const arrayMachine = {
         ERROR_NOINPUT: 'errorNoInput',
       },
     },
-    pushTicked: {},
-    unshiftTicked: {},
-    concatTicked: {},
+    pushTicked: {
+      on: {
+        ARRAY_INSERT: 'finish',
+        ERROR_NOINPUT: 'errorNoInput',
+      },
+    },
+    unshiftTicked: {
+      on: {
+        ARRAY_INSERT: 'finish',
+        ERROR_NOINPUT: 'errorNoInput',
+      },
+    },
+    concatTicked: {
+      on: {
+        ARRAY_INSERT: 'finish',
+        ERROR_NOINPUT: 'errorNoInput',
+      },
+    },
     errorUnticked: {
       on: {
         ARRAY_INSERT: 'finish',
@@ -58,7 +73,7 @@ const arrayMachine = {
 const stateMachine = Machine({
   id: 'state',
   type: 'parallel',
-  context: {array: ['Orange', 'Apple', 'Banana']},
+  context: {initArray: ['Orange', 'Apple', 'Banana']},
   states: {
     routes: routesMachine,
     array: arrayMachine,

@@ -7,7 +7,7 @@ import {StateMachineProvider} from 'state/StateMachine';
 
 export default function ArrayInsertion() {
   const [current, send] = useContext(StateMachineProvider);
-  const initArray = current.context.array;
+  const {initArray} = current.context;
   const push = current.matches('array.pushTicked');
   const unshift = current.matches('array.unshiftTicked');
   const concat = current.matches('array.concatTicked');
